@@ -29,69 +29,56 @@ This is used to build a working active direcotry which we will then add users ut
 <h2>Setup Walk-through:</h2>
 
 <p align="left">
-Click the download link and download the correct pfsense version you need (AMD64 version works for most users) <br/> 
-Select the DVD ISO Installer option: <br/>
-<img src="https://i.imgur.com/iYxlJRu.png" height="80%" width="80%" alt="Firewall Steps"/>
+<h2>Windows Server Setup</h2>
+Click the download link and download the Windows 10 ISO and Windows Server ISO <br/> 
+Lets start by creating the Windows Server which will be our Domain Controller, in Virtualbox complete the following: <br/>
+1. Click New to create new machine <br/>
+2. Name the machine something along the lines of DomainController or DC <br/>
+3. Select ISO image and set version to "Other Windows(64-bit)" <br/>
+4. Check the box that says "Skip unattended installation" <br/>
+5. Set the memory size to at least 2gb (2048mb) <br/>
+6. Click "Finish" <br/>
+<img src="https://i.imgur.com/ZaG6frf.png" height="80%" width="80%" alt="Firewall Steps"/>
 <br />
 <br />
-In Virtualbox create a new machine and complete the following (once done click finish):  <br/>
-Set Type to BSD <br/>
-Set Version to FreeBSD(64-bit) <br/>
-Allocate at least 2gb of Basse Memory <br/>
-Allocate at least 19gb of virtual hard disk space <br/>
-<img src="https://i.imgur.com/v7deaWG.png" height="80%" width="80%" alt="Firewall Steps"/> 
-<br />
-<img src="https://i.imgur.com/JwEvz2n.png" height="80%" width="80%" alt="Firewall Steps"/>
+Select the machine you made and click on settings <br/>
+Go to the network tab <br/>
+For adpater 1 select "attached to:" and choose NAT <br/>
+Select adapter 2 and click the box taht says "Enable Network Adapter" <br/>
+Select "attached to:" and choose Internal <br/>
+<img src="https://i.imgur.com/CTg6lgB.png" height="80%" width="80%" alt="Firewall Steps"/> 
 <br />
 <br />
-Select the machine and Click settings the click the network tab. Here we will be creating the network interfaces, adpater 1 will be our LAN, adpater 2 is our WAN, adapter 3 is our DMZ <br/>
-For all adpaters make sure that "Enable Network Adaptor" is checked and do the following: <br/>
-Adapter 1 Attached to is NAT <br/>
-Adapter 2 Attached to is Internal Network <br/>
-Adapter 1 Attached to is Internal Network <br/>
-<img src="https://i.imgur.com/FKv6KgG.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br />
-<img src="https://i.imgur.com/1tYim7v.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br />
-<br />
-Start the Virtual Machine and start the installation <br/>
-<img src="https://i.imgur.com/BmDRGKu.png" height="80%" width="80%" alt="Firewall Steps"/>
+Start the machine to begin the installation <br/>
+Once a window pops up click next and then "Install Now" <br/>
+Select the "Windows Server 2019 Standard Evaluation (Desktop Experience)" <br/>
+Keep going through until it asks which type of installation you want, select "Custom" then Next <br/>
+The installation will take some time <br/>
+Once you get to customize settings, enter any password that is simple and you'll remember and click finish <br/>
+<img src="https://i.imgur.com/n1qQBhv.png" height="80%" width="80%" alt="Firewall Steps"/> 
 <br />
 <br />
-Choose all the default options and make sure you select the checkbox for the ZFS Configuration section:  <br/>
-<img src="https://i.imgur.com/VZVpugG.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br />
-<br />
-Select Yes for the next option and wait until installation is complete, once you get the complete box you must unmount the ISO or it will cycle through the boot process again:  <br/>
-At the top bar of the Virtualbox go to Devices -> Optical Drives -> select your pfsense ISO -> Click Force Unmount <br/>
-Click Reboot <br/>
-<img src="https://i.imgur.com/io57SG0.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br />
-<br />
-Create and install another virtual machine for Linux or Windows whichever you prefer (I used Linux)  <br/>
-Edit the adapter 1 to be Attached to Internal Network and launch the new VM <br/>
-Open the command line and type ifconfig (linux) or ipconfig (windows) <br/>
-Check to see that the inet ip matches your LAN ip thats on PFsense 
-<img src="https://i.imgur.com/9rRPKPU.png" height="80%" width="80%" alt="Firewall Steps"/>
+Now to unlock the machine requires a special input that virtual machines dont allow <br/>
+So on the top of the machine click on "Input" and then click Keyboard and select "Insert Ctrl+Alt+Del" <br/>
+Enter the password you made earlier <br/>
+
+<h2>Optional: Guest additions installation</h2>
+This section is to install guesst additions which will help to scale your vm window size and help it run smoother but you can skip this <br/>
 <br/>
-<img src="https://i.imgur.com/GA4Rpbg.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br/>
-<br/>
-You can try to ping the LAN ip in the command line to see if you get a response back <br/>
-<img src="https://i.imgur.com/u3qFSN0.png" height="80%" width="80%" alt="Firewall Steps"/>
-<br/>
-<br/>
-Open a web browser and type in the LAN ip, you will get a warning since there is no certificate, you can just ignore that an advance <br/>
-<img src="https://i.imgur.com/AP54rb3.png" height="80%" width="80%" alt="Firewall Steps"/> 
-<br/>
-<br/>
-Login using the default credentials all lowercase for the username and password: <br/> 
-Username is admin <br/>
-Password is pfsense <br/>
-<img src="https://i.imgur.com/nhHiR0V.png" height="80%" width="80%" alt="Firewall Steps"/>  
-<br/>
-<br/>
-Go through the installation wizard and then you have your firewall all setup using pfsense!
+On the top of your machine click on "devices" and select "Insert guest additions CD image"
+Go to File explorer (Click the folder icon on the bottom) 
+Click on "This PC" and select virtual box guest additions 
+<img src="https://i.imgur.com/4JwmdG8.png" height="80%" width="80%" alt="Firewall Steps"/>  
+<br />
+<br />
+Click on the "VBoxWindowsAdditions-amd64" and click through all the default options
+Click on the "I want to manually reboot later" option
+Shut the VM down by right clicking on the power button and selecting shutdown 
+<img src="https://i.imgur.com/vLerNjf.png" height="80%" width="80%" alt="Firewall Steps"/>  
+
+
+
+
 
   
 </p>
