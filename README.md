@@ -1,4 +1,4 @@
-<h1>Creating an Active Directory and addings Users with Powershell</h1>
+<h1>Creating an Active Directory and adding Users with Powershell</h1>
 
 
 <h2>Description</h2>
