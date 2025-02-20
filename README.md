@@ -26,8 +26,6 @@ This is used to build a working active directory which we will then add users ut
 -[Windows 2019 Server ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019) <br/>
 
 
-<h2>Setup Walk-through:</h2>
-
 <p align="left">
 <h2>Windows Server Setup</h2>
 Click the download link and download the Windows 10 ISO and Windows Server ISO <br/> 
