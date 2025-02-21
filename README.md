@@ -24,6 +24,8 @@ This is used to build a working active directory which we will then add users ut
 -[Virtualbox](https://www.virtualbox.org/wiki/Downloads) <br/>
 -[Windows 10 ISO](https://www.microsoft.com/en-us/software-download/windows10) <br/> 
 -[Windows 2019 Server ISO](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019) <br/>
+-[Powershell Script](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbWswUnViZHhXNEVqU0lxT3lZcnF1dkx5cm9Hd3xBQ3Jtc0trN0NQM3RkXzZSdEM2T0Jqc0huaUhac2o3MEd2bG1UaWdqME4wOUViMUdUaS10anhjdDRMeGNOYXhKR2FCZWVXaFBUblZiV0RHQ05PNW02XzN4c0Ixc09id0FqUm9OV0ozYUtvRFdKZjdMWXZMbmpjSQ&q=https%3A%2F%2Fgithub.com%2Fjoshmadakor1%2FAD_PS%2Farchive%2Frefs%2Fheads%2Fmaster.zip&v=MHsI8hJmggI) <br/>
+
 
 
 <p align="left">
@@ -197,7 +199,7 @@ Then Click Next and Finish <br/>
 <br />
 <br />
 Your PC Name (local) should now have a green arrow on it to indicate it was successful <br/>
-Now we will setup a DHCP server for new users for our WIndows 10 client <br/>
+Now we will setup a DHCP server for new users for our Windows 10 client <br/>
 On the Server manager dashboard click on "Add roles and features" <br/>
 Click next until you get to the "Server Roles" section <br/>
 Select "DHCP Server" and click "Add Features" <br/>
@@ -226,6 +228,152 @@ Green arrows should appear on the IPv4 and IPv6 icons <br/>
 <img src="https://i.imgur.com/EkgPEs5.png" height="80%" width="80%" alt="Firewall Steps"/>
 <br />
 <br />
+Go back to the Server Manager Dashboard and click on "Configure this local server" <br/>
+Click on the "IE Enhanced Security Configuration" <br/>
+Select "off" for both options and click "OK" <br/>
+<img src="https://i.imgur.com/9Kjhtd9.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+
+<h2>Creating Users with Powershell</h2>
+Copy the Link for the powershell script and paste it into the VM's internet explorer <br/>
+Save it to your Desktop to make life easier <br/>
+Open the folder and open the "names" text folder <br/>
+At the top enter your own name or whatever new name you want and save <br/>
+<img src="https://i.imgur.com/l4ggpuY.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+Click on the windows icon -> Click on Windows Powershell -> Right Click on "Windows Powershell ISE" -> Click "More" -> Select "Run as Administrator" <br/>
+Click Yes <br/>
+Click on the folder icon at the top <br/>
+Navigate to where you put the downloaded powershell folder and select the "1_CREATE_USERS" script to open it <br/>
+<img src="https://i.imgur.com/awY2HKR.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+In the terminal under the script type "Set-ExecutionPolicy Unrestricted" <br/>
+Select "Yes to All"
+<img src="https://i.imgur.com/bvuVd2W.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+In line 2 of the script you can set the Users passswords to whatever you wish <br/>
+In the terminal naviagte to where you put the downloaded powershell by using the command "cd" and naviagting to your user account (Ex: cd C:\users\a-rrivera\desktop\AD_PS-master) <br/>
+<img src="https://i.imgur.com/wL516at.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+Now click the green play button at the top and click "Run Once" <br/>
+It should now start creating users <br/>
+<img src="https://i.imgur.com/QEor10Z.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+For fun if you go back to the "Active Directory Users and Computers" Section and refresh the domain you can see the newly added "_USERS" folder <br/>
+If you Click into it you can also see all the users created and even find the one you named <br/>
+<img src="https://i.imgur.com/YiXmIJt.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+
+<h2>Creating and Setting up Windows 10 Client Machine:</h2>
+Navigate back to virtualbox itself <br/>
+Select New <br/>
+Name it whatever you want I named mine "Client" <br/>
+Use the Windows 10 ISO you downloaded <br/>
+Give it at least 2gb of memory <br/>
+Click Finish <br/>
+<br /> 
+<br /> 
+Select the machine and click on "Settings" <br/>
+Naviagte to the network section <br/>
+For Adapter 1 set the "Attached to:" as "Internal" <br/>
+Now run the machine to begin installation <br/>
+<img src="https://i.imgur.com/GA997Sn.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+Click Next <br/>
+Click Install Now <br/>
+Select "I Don't have a product Key" <br/>
+Select "Windows 10 Pro" <br/>
+Keep going through until asked "Upgrade" or "Custom" and select "Custom" <br/>
+Keep going through until installation begins <br/>
+<img src="https://i.imgur.com/SWF4g1a.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br /> 
+Keep going through the installation process <br/>
+When asked about a seocnd keyboard layout click skip <br/>
+If you get the screen "Let's connect you to a network" click "I don't have internet" <br/>
+If asked for Personal or organization use click "Organization" <br/>
+If prompted for a Microsoft email on the bottom left click Join Domain <br/>
+<br />
+<br /> 
+Create any username you wish <br/>
+A password is not needed so you can just click Next <br/>
+Keep going through until installation is complete <br/>
+Once done try accesssing the internet by using the Edge web browser to make sure the VM is properly setup <br/>
+<br />
+<br /> 
+Next to the windows icon type in "cmd" and click enter to open the command terminal <br/>
+Type in "ipconfig" and verify that the IPv4 adress is "172.16.0.100" <br/>
+Verify it matches the following image <br/>
+<img src="https://imgur.com/OYGDB0b" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+Now we will try and verify that we can ping back to the domain controller <br/>
+Type in ping and whatever the name of your domain is (EX: ping mydomain.com) <br/>
+If you get any reply it should be good <br/>
+<img src="https://i.imgur.com/zDFL3mG.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+Let's rename this PC and join the domain <br/>
+Right Click on the Windows icon -> Click on System -> At the very bottom Click "Rename this PC (Advanced)" <br/>
+Click "Change" <br/>
+Name the PC whatever you want, I'll make my name "Client1" <br/>
+At the bottom select the circle that has "Domain" next to it <br/>
+<img src="https://i.imgur.com/05VoMfy.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+Click Ok <br/>
+Now use your admin credentials that you created earlier on your Domain Controller (EX: a-rrivera and Password1) <br/>
+You should get a popup that says welome to the domain <br/> 
+<img src="https://i.imgur.com/Ouq4LCL.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+Restart the machine (Right Click windows icon and select restart) <br/>
+Select "Other User" <br/>
+Here you can use ANY of the users we generated to login (easiest will probably be the one you added to the names list before) <br/>
+Use whichever password you had set to be generated as the login password <br/>
+<img src="https://i.imgur.com/taOh4Rd.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+You should now be logged in as one of the users you created! <br/>
+You can do this with any of the users you made give it a try! <br/>
+<br />
+<br />
+
+
+<h2>Fun Extras!</h2>
+As some added fun you can go back to your domain controller and if you go to the DHCP section like we had before and go to -> IPv4 -> Adress Leases then you can see your client machine with its lease!
+<img src="https://i.imgur.com/8A4KQ9q.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+If you also go back to the "Active Directory Users and Computers" section and click on the "Computers" folder then you can see your client machine as part of the domain!
+<img src="https://i.imgur.com/H3BlBEi.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+If you go back to the user you're logged in with on your client machine, go to the command terminal and type in "whoami" then you can see the user name along with the domain!
+<img src="https://i.imgur.com/Vq0xkd0.png" height="80%" width="80%" alt="Firewall Steps"/>
+<br />
+<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
