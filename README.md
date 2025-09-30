@@ -65,9 +65,9 @@ Enter the password you made earlier <br/>
 <h2>Optional: Guest additions installation</h2>
 This section is to install guesst additions which will help to scale your vm window size and help it run smoother but you can skip this <br/>
 <br/>
-On the top of your machine click on "devices" and select "Insert guest additions CD image"
-Go to File explorer (Click the folder icon on the bottom) 
-Click on "This PC" and select virtual box guest additions 
+On the top of your machine click on "devices" and select "Insert guest additions CD image" <br/>
+Go to File explorer (Click the folder icon on the bottom) <br/>
+Click on "This PC" and select virtual box guest additions <br/> 
 <img src="https://i.imgur.com/4JwmdG8.png" height="80%" width="80%" alt="Firewall Steps"/>  
 <br />
 <br />
@@ -87,7 +87,7 @@ Click "Change adapter options" <br/>
 <br />
 Here we will have to figure out which of the 2 network connections is the internet and which is the internal network <br/>
 Right click on one of the connections and select "Status" then click "Details" <br/>
-In the IPv4 section if you see an ip along the lines of 10.0.0.1 or anything starting with 10 this is most likley your home internet <br/>
+In the IPv4 section if you see an ip along the lines of 10.0.0.1 or anything starting with 10 this is most likely your home internet <br/>
 <br/>
 
 <p align="Center">
@@ -130,7 +130,7 @@ Then keep clicking next until you are able to click install and wait for the ins
 <img src="https://i.imgur.com/9q6kJAc.png" height="80%" width="80%" alt="Firewall Steps"/>
 <br />
 <br />
-On the top Server manager dashboard there should be a flag icon witha yellow warning symbol <br/>
+On the top Server manager dashboard there should be a flag icon with a yellow warning symbol <br/>
 Click on it and click "Promote this server to a domain controller" <br/>
 <img src="https://i.imgur.com/9wa1U9J.png" height="80%" width="80%" alt="Firewall Steps"/> 
 <br />
@@ -297,9 +297,9 @@ Keep going through until installation begins <br/>
 <br />
 <br /> 
 Keep going through the installation process <br/>
-When asked about a seocnd keyboard layout click skip <br/>
+When asked about a second keyboard layout click skip <br/>
 If you get the screen "Let's connect you to a network" click "I don't have internet" <br/>
-If asked for Personal or organization use click "Organization" <br/>
+If asked for Personal or organization use, click "Organization" <br/>
 If prompted for a Microsoft email on the bottom left click Join Domain <br/>
 <br />
 <br /> 
