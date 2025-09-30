@@ -312,7 +312,7 @@ Once done try accesssing the internet by using the Edge web browser to make sure
 Next to the windows icon type in "cmd" and click enter to open the command terminal <br/>
 Type in "ipconfig" and verify that the IPv4 adress is "172.16.0.100" <br/>
 Verify it matches the following image <br/>
-<img src="https://imgur.com/OYGDB0b" height="80%" width="80%" alt="Firewall Steps"/>
+<img src="https://imgur.com/OYGDB0b.png" height="80%" width="80%" alt="Firewall Steps"/>
 <br />
 <br />
 Now we will try and verify that we can ping back to the domain controller <br/>
