@@ -2,7 +2,7 @@
 
 
 <h2>Description</h2>
-This is used to build a working active directory which we will then add users utilzing powershell and a script
+This is used to build a working active directory which we will then add users utilizing powershell and a script
 <br />
 
 <h2>Prerequisites</h2>
